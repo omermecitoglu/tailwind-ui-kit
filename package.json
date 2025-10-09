@@ -1,0 +1,29 @@
+{
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "@fortawesome/react-fontawesome": "^3",
+    "clsx": "^2",
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwind-merge": "^3",
+    "tailwindcss": "^4"
+  },
+  "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@omer-x/eslint-config": "^2.2.5",
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "@vitejs/plugin-react": "^5.0.4",
+    "eslint": "^9.37.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9"
+  }
+}
