@@ -1,0 +1,11 @@
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animation {
+  animation: ripple 600ms linear;
+  transform: scale(0);
+}
