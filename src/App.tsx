@@ -11,6 +11,8 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons/faTrian
 import { type ComponentProps } from "react";
 import Button from "./components/Button";
 import LinkButton from "./components/LinkButton";
+import TextArea from "./components/TextArea";
+import SimpleInput from "./components/forms/SimpleInput";
 
 const App = () => {
   const handleClick = () => setTimeout(() => alert("You clicked a button half a second ago!"), 600);
@@ -122,6 +124,11 @@ const App = () => {
           </div>
         </div>
       </div>
+      <h1 className="text-4xl py-3 font-bold tracking-tight text-gray-900 dark:text-gray-100">
+        Forms
+      </h1>
+      <SimpleInput />
+      <TextArea />
     </div>
   );
 };
