@@ -1,25 +1,29 @@
 {
   "compilerOptions": {
+    "strict": true, // default in ts6, can be removed after upgrade
+    "module": "esnext", // default in ts6, can be removed after upgrade
+    "moduleResolution": "bundler", // default in ts6, can be removed after upgrade
+    "target": "esnext", // default in ts6, can be removed after upgrade
+    "rootDir": ".", // default in ts6, can be removed after upgrade
+    "noUncheckedSideEffectImports": true, // default in ts6, can be removed after upgrade
+    "libReplacement": false, // default in ts6, can be removed after upgrade
+    "types": [],
+    "lib": ["ESNext"],
+
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2023",
-    "lib": ["ES2023"],
-    "module": "ESNext",
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,
 
     /* Linting */
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
   },
   "include": ["*.config.ts"]
 }

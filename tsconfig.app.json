@@ -1,14 +1,20 @@
 {
   "compilerOptions": {
+    "strict": true, // default in ts6, can be removed after upgrade
+    "module": "esnext", // default in ts6, can be removed after upgrade
+    "moduleResolution": "bundler", // default in ts6, can be removed after upgrade
+    "target": "esnext", // default in ts6, can be removed after upgrade
+    "rootDir": ".", // default in ts6, can be removed after upgrade
+    "noUncheckedSideEffectImports": true, // default in ts6, can be removed after upgrade
+    "libReplacement": false, // default in ts6, can be removed after upgrade
+    "types": [],
+    "lib": ["ESNext", "DOM"],
+    
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
@@ -16,12 +22,10 @@
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
   },
   "include": ["src"]
 }
