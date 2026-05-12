@@ -20,6 +20,6 @@ export default [
     },
   },
   {
-    ignores: ["public/*"],
+    ignores: ["dist"],
   },
 ];
