@@ -5,6 +5,7 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
+    "@base-ui/react": "^1",
     "@fortawesome/react-fontawesome": "^3",
     "clsx": "^2",
     "react": "^19",
