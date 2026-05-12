@@ -1,8 +1,45 @@
 {
+  "name": "@omer-x/tailwind-ui-kit",
+  "version": "1.0.0",
+  "description": "Tailwind CSS-based React component library for building user interfaces",
+  "keywords": [
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omermecitoglu/tailwind-ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omermecitoglu/tailwind-ui-kit/issues"
+  },
+  "homepage": "https://github.com/omermecitoglu/tailwind-ui-kit#readme",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Omer Mecitoglu",
+    "email": "omer.mecitoglu@gmail.com",
+    "url": "https://omermecitoglu.github.io"
+  },
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist/"
+  ],
+  "exports": {
+    "./dialog": {
+      "types": "./dist/components/dialog/index.d.ts",
+      "import": "./dist/components/dialog/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js"
+    }
+  },
   "scripts": {
     "dev": "vite --port 3000",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "tsup"
   },
   "peerDependencies": {
     "@base-ui/react": "^1",
@@ -21,10 +58,12 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "esbuild-fix-imports-plugin": "^1.0.23",
     "eslint": "^9.37.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "typescript": "^6.0.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5",
     "vite": "^8.0.12"
   }
 }
