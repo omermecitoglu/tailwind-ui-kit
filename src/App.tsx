@@ -5,10 +5,14 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons/faGoogle";
 import { faWindows } from "@fortawesome/free-brands-svg-icons/faWindows";
 import { faBullseye } from "@fortawesome/free-solid-svg-icons/faBullseye";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons/faCircleExclamation";
+import { faMoon } from "@fortawesome/free-solid-svg-icons/faMoon";
+import { faSun } from "@fortawesome/free-solid-svg-icons/faSun";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons/faThumbsDown";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons/faTriangleExclamation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type ComponentProps } from "react";
+import BaseButton from "./components/button/BaseButton";
 import Button from "./components/legacy/Button";
 import LinkButton from "./components/legacy/LinkButton";
 
@@ -17,8 +21,22 @@ const App = () => {
 
   const Link = ({ children, ...otherProps }: ComponentProps<"a">) => (<a {...otherProps}>{children}</a>);
 
+  const toggleTheme = () => {
+    const currentTheme = document.body.dataset.theme;
+    document.body.dataset.theme = currentTheme === "dark" ? "light" : "dark";
+  };
+
   return (
     <div className="container mx-auto px-3 py-3">
+      <BaseButton onClick={toggleTheme}>
+        <div className="hidden dark:block">
+          <FontAwesomeIcon icon={faSun} size="lg" />
+        </div>
+        <div className="block dark:hidden">
+          <FontAwesomeIcon icon={faMoon} size="lg" />
+        </div>
+        Switch Theme
+      </BaseButton>
       <h1 className="text-4xl py-3 font-bold tracking-tight text-gray-900 dark:text-gray-100">
         Buttons
       </h1>
