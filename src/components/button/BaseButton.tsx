@@ -21,7 +21,7 @@ const BaseButton = ({
   ...otherProps
 }: BaseButtonProps) => (
   <PulseButton
-    className={state => cn({
+    className={cn({
       // Size
       "h-12 px-5 text-base leading-7 gap-3": size === "lg",
       "h-10 px-4 text-sm leading-6 gap-3": size === "md",
@@ -44,7 +44,7 @@ const BaseButton = ({
       // Cursor
       "cursor-pointer",
       "data-disabled:cursor-default",
-    ], typeof className === "function" ? className(state) : className)}
+    ], className)}
     disabled={disabled}
     focusableWhenDisabled={pending || focusableWhenDisabled}
     {...otherProps}
