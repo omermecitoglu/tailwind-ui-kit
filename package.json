@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Tailwind CSS-based React component library for building user interfaces",
   "keywords": [
+    "tailwind",
+    "ui-kit",
+    "font-awesome",
     "typescript"
   ],
   "repository": {
@@ -24,6 +27,8 @@
   },
   "license": "MIT",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/"
   ],

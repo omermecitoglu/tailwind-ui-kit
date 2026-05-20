@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { AnimatedPopup, DialogBackdrop, DialogTitle } from "..";
+import { AnimatedPopup, DialogBackdrop, DialogTitle } from ".";
 
 describe("AnimatedPopup", () => {
   it("must be a function", () => {
