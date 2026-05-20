@@ -47,7 +47,7 @@ const Button = ({
       <>{text}</>
     )}
     {stretched && icon && (
-      <div className="w-[var(--fa-width,1.25em)]" />
+      <div className="w-(--fa-width,1.25em)" />
     )}
   </PulseButton>
 );

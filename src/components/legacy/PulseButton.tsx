@@ -1,6 +1,6 @@
 "use client";
-import { type ComponentPropsWithoutRef, type ElementType, type ReactNode, useState } from "react";
-import styles from "../../styles/ripple.module.css";
+import { type ComponentPropsWithoutRef, type ElementType, type ReactNode } from "react";
+import { useRipples } from "../../hooks/useRipples";
 import { cn } from "../../utils/cn";
 
 type PulseButtonProps<As extends ElementType> = {
@@ -17,23 +17,11 @@ const PulseButton = <As extends ElementType = "button">({
   ...otherProps
 }: PulseButtonProps<As>) => {
   const Component = as ?? "button";
-
-  const [ripples, setRipples] = useState<{ x: number, y: number, size: number, id: number }[]>([]);
+  const [triggerRippleEffect, ripples] = useRipples();
 
   const handleClick = (e: React.MouseEvent<Element>) => {
+    triggerRippleEffect(e);
     onClick?.(e);
-
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = e.clientX - rect.left - (size / 2);
-    const y = e.clientY - rect.top - (size / 2);
-
-    const newRipple = { x, y, size, id: Date.now() };
-    setRipples(prev => [...prev, newRipple]);
-
-    setTimeout(() => {
-      setRipples(prev => prev.filter(r => r.id !== newRipple.id));
-    }, 600);
   };
 
   return (
@@ -43,18 +31,7 @@ const PulseButton = <As extends ElementType = "button">({
       {...(otherProps as unknown as object)}
     >
       {children}
-      {ripples.map(ripple => (
-        <span
-          key={ripple.id}
-          className={cn(styles.animation, "absolute rounded-full bg-white opacity-40")}
-          style={{
-            left: ripple.x,
-            top: ripple.y,
-            width: ripple.size,
-            height: ripple.size,
-          }}
-        />
-      ))}
+      {ripples}
     </Component>
   );
 };
