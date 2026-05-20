@@ -37,6 +37,10 @@
       "types": "./dist/components/dialog/index.d.ts",
       "import": "./dist/components/dialog/index.js"
     },
+    "./table": {
+      "types": "./dist/components/table/index.d.ts",
+      "import": "./dist/components/table/index.js"
+    },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
       "import": "./dist/utils/index.js"
