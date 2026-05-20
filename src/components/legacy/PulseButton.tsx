@@ -1,7 +1,7 @@
 "use client";
 import { type ComponentPropsWithoutRef, type ElementType, type ReactNode, useState } from "react";
-import styles from "../styles/ripple.module.css";
-import { cn } from "../utils/cn";
+import styles from "../../styles/ripple.module.css";
+import { cn } from "../../utils/cn";
 
 type PulseButtonProps<As extends ElementType> = {
   as?: As,

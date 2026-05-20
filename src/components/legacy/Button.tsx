@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import PulseButton from "./PulseButton";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import type { ComponentProps } from "react";

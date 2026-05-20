@@ -9,8 +9,8 @@ import { faThumbsDown } from "@fortawesome/free-solid-svg-icons/faThumbsDown";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons/faTriangleExclamation";
 import { type ComponentProps } from "react";
-import Button from "./components/Button";
-import LinkButton from "./components/LinkButton";
+import Button from "./components/legacy/Button";
+import LinkButton from "./components/legacy/LinkButton";
 
 const App = () => {
   const handleClick = () => setTimeout(() => alert("You clicked a button half a second ago!"), 600);
