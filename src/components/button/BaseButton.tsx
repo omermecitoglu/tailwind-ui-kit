@@ -1,8 +1,9 @@
-import { Button } from "@base-ui/react/button";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type ComponentProps, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import PulseButton from "./PulseButton";
+import type { Button } from "@base-ui/react/button";
 
 type BaseButtonProps = ComponentProps<typeof Button> & {
   size?: "lg" | "md" | "sm" | "xs",
@@ -19,7 +20,7 @@ const BaseButton = ({
   children,
   ...otherProps
 }: BaseButtonProps) => (
-  <Button
+  <PulseButton
     className={state => cn({
       // Size
       "h-12 px-5 text-base leading-7 gap-3": size === "lg",
@@ -28,6 +29,7 @@ const BaseButton = ({
       "h-8 px-2.5 text-xs leading-4 gap-2": size === "xs",
     }, [
       // Base
+      "relative",
       "flex items-center justify-center",
       "rounded-md",
       "font-medium",
@@ -51,7 +53,7 @@ const BaseButton = ({
       <FontAwesomeIcon icon={faSpinner} size="lg" className="fa-spin-pulse" />
     )}
     {children}
-  </Button>
+  </PulseButton>
 );
 
 export default BaseButton;

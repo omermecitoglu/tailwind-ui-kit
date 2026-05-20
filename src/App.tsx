@@ -28,7 +28,6 @@ const App = () => {
     "border",
     "border-neutral-300",
     "hover:bg-neutral-300",
-    "active:bg-neutral-400",
     "focus-visible:outline-neutral-500",
     "disabled:bg-neutral-100",
     "disabled:text-neutral-400",
