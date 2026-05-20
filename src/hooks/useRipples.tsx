@@ -20,11 +20,11 @@ export function useRipples() {
   };
 
   const ripplesNode = (
-    <>
+    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-md">
       {ripples.map(ripple => (
         <span
           key={ripple.id}
-          className={cn(styles.animation, "absolute rounded-full bg-white opacity-40")}
+          className={cn(styles.animation, "absolute rounded-full bg-current opacity-10")}
           style={{
             left: ripple.x,
             top: ripple.y,
@@ -33,7 +33,7 @@ export function useRipples() {
           }}
         />
       ))}
-    </>
+    </div>
   );
 
   return [handleClick, ripplesNode] as const;
