@@ -5,6 +5,7 @@ export default defineConfig({
   outDir: "dist",
   entry: [
     "src/components/**/*",
+    "src/hooks/**/*",
     "src/styles/**/*",
     "src/utils/**/*",
     "!src/**/*.test.ts",
