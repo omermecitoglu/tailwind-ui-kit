@@ -20,7 +20,7 @@ export function useRipples() {
   };
 
   const ripplesNode = (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-md">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[inherit]">
       {ripples.map(ripple => (
         <span
           key={ripple.id}
