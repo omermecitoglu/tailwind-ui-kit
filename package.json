@@ -45,6 +45,10 @@
       "types": "./dist/components/dialog/index.d.ts",
       "import": "./dist/components/dialog/index.js"
     },
+    "./form": {
+      "types": "./dist/components/form/index.d.ts",
+      "import": "./dist/components/form/index.js"
+    },
     "./table": {
       "types": "./dist/components/table/index.d.ts",
       "import": "./dist/components/table/index.js"
