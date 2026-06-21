@@ -62,6 +62,9 @@
     "dev": "vite --port 3000",
     "build": "tsup"
   },
+  "dependencies": {
+    "@omer-x/zod-to-form-constraints": "^1.0.0"
+  },
   "peerDependencies": {
     "@base-ui/react": "^1",
     "@fortawesome/free-brands-svg-icons": "^7",
