@@ -10,6 +10,7 @@ type PulseButtonProps = ComponentProps<typeof Button> & {
 
 const PulseButton = ({
   type,
+  disabled,
   onClick,
   children,
   ...otherProps
@@ -19,14 +20,17 @@ const PulseButton = ({
   const submitting = type === "submit" && pending;
 
   const handleClick = (e: BaseUIEvent<React.MouseEvent<HTMLButtonElement>>) => {
-    triggerRippleEffect(e);
     onClick?.(e);
+    if (!e.defaultPrevented) {
+      triggerRippleEffect(e);
+    }
   };
 
   return (
     <Button
       {...otherProps}
       type={type}
+      disabled={submitting || disabled}
       onClick={handleClick}
       data-submitting={submitting ? "" : undefined}
     >
