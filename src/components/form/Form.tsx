@@ -37,7 +37,6 @@ const Form = ({
 
   return (
     <BaseForm action={formAction} className={className} errors={state}>
-      {JSON.stringify(Array.from(fieldsRef.current))}
       {Object.entries(globalErrors).map(([key, value]) => (
         <div key={key} className="bg-red-500/50">
           {value}
