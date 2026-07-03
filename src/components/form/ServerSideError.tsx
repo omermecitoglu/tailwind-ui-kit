@@ -14,12 +14,12 @@ const ServerSideError = ({
   messages: fieldMessages = {},
   render,
 }: ServerSideErrorProps) => {
-  const { getError, errorMessages: formMessages } = use(FormContext);
-  const error = getError(name);
-  if (!error) return null;
+  const { getFieldMessage, messageTranslations: formMessages } = use(FormContext);
+  const message = getFieldMessage(name);
+  if (!message) return null;
   return (
     <Field.Error match render={render}>
-      {fieldMessages[error] || formMessages[error] || error}
+      {fieldMessages[message] || formMessages[message] || message}
     </Field.Error>
   );
 };

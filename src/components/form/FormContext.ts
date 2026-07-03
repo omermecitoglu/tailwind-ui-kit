@@ -1,15 +1,15 @@
 import { createContext } from "react";
 
 interface FormContextInterface {
-  getError: (fieldName: string) => string | null,
-  errorMessages: Partial<Record<string, string>>,
+  getFieldMessage: (fieldName: string) => string | null,
+  messageTranslations: Partial<Record<string, string>>,
   registerField: (fieldName: string) => void,
   unregisterField: (fieldName: string) => void,
 }
 
 export const FormContext = createContext<FormContextInterface>({
-  getError: () => null,
-  errorMessages: {},
+  getFieldMessage: () => null,
+  messageTranslations: {},
   registerField: () => null,
   unregisterField: () => null,
 });

@@ -12,7 +12,7 @@ type FormProps = Omit<ComponentProps<"form">, "action"> & {
 
 const Form = ({
   action,
-  messages = {},
+  messages: messageTranslations = {},
   renderMessages,
   className,
   children,
@@ -20,7 +20,7 @@ const Form = ({
   const [state, formAction, _loading] = useActionState(action, {});
   const fieldsRef = useRef<Set<string>>(new Set());
 
-  const getError = (fieldName: string) => {
+  const getFieldMessage = (fieldName: string) => {
     if (fieldName in state) {
       return state[fieldName];
     }
@@ -35,23 +35,28 @@ const Form = ({
     fieldsRef.current.delete(fieldName);
   };
 
-  const globalErrors = Object.fromEntries(Object.entries(state).filter(([key]) => {
-    if (!fieldsRef.current.has(key)) return true;
-    return key.startsWith("[") && key.endsWith("]");
-  }));
+  const { formMessages, fieldMessages } = Object.keys(state).reduce((bundle, key) => {
+    if (fieldsRef.current.has(key)) {
+      return { ...bundle, fieldMessages: { ...bundle.fieldMessages, [key]: state[key] } };
+    }
+    return { ...bundle, formMessages: { ...bundle.formMessages, [key]: state[key] } };
+  }, {
+    formMessages: {} as Record<string, string>,
+    fieldMessages: {} as Record<string, string>,
+  });
 
   return (
-    <BaseForm action={formAction} className={className} errors={state}>
-      {Object.entries(globalErrors).map(([errorKey, error]) => (
+    <BaseForm action={formAction} className={className} errors={fieldMessages}>
+      {Object.entries(formMessages).map(([messageKey, message]) => (
         <JustDiv
-          key={errorKey}
-          data-message-type={errorKey.startsWith("[") ? errorKey.replace(/^\[|\]$/g, "") : "default"}
+          key={messageKey}
+          data-message-type={messageKey.startsWith("[") ? messageKey.replace(/^\[|\]$/g, "") : "default"}
           render={renderMessages}
         >
-          {messages[error] || error}
+          {messageTranslations[message] || message}
         </JustDiv>
       ))}
-      <FormContext value={{ getError, errorMessages: messages, registerField, unregisterField }}>
+      <FormContext value={{ getFieldMessage, messageTranslations, registerField, unregisterField }}>
         {children}
       </FormContext>
     </BaseForm>
