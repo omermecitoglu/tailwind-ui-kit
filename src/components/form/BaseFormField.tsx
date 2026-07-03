@@ -1,8 +1,9 @@
 import { Field } from "@base-ui/react/field";
 import { getErrorMessagePayload, getFieldConstraints } from "@omer-x/zod-to-form-constraints";
+import JustInput from "../elements/JustInput";
 import FieldRoot from "./FieldRoot";
 import ServerSideError from "./ServerSideError";
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps } from "react";
 import type { ZodType } from "zod";
 
 type BaseFormFieldProps = {
@@ -10,7 +11,7 @@ type BaseFormFieldProps = {
   name: string,
   label?: string,
   messages?: Partial<Record<string, string>>,
-  renderInput: (props: ReturnType<typeof getFieldConstraints>) => ReactNode,
+  control?: ComponentProps<typeof JustInput>["render"],
   renderLabel?: ComponentProps<typeof Field.Label>["render"],
   renderErrors?: ComponentProps<typeof Field.Error>["render"],
   clientSideErrors?: Partial<Record<keyof ValidityState, string | ((payload: string | number | null) => string)>>,
@@ -21,7 +22,7 @@ const BaseFormField = ({
   name,
   label,
   messages,
-  renderInput,
+  control,
   renderLabel,
   renderErrors,
   clientSideErrors = {},
@@ -32,7 +33,7 @@ const BaseFormField = ({
         {label}
       </Field.Label>
     )}
-    {renderInput(getFieldConstraints(schema))}
+    <JustInput render={control} {...getFieldConstraints(schema)} />
     {Object.entries(clientSideErrors).map(([stateName, message]) => (
       <Field.Error key={stateName} match={stateName as keyof ValidityState} render={renderErrors}>
         {typeof message === "string" ? message : message(getErrorMessagePayload(schema, stateName as keyof ValidityState))}
