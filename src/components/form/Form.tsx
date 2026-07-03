@@ -5,10 +5,12 @@ import { FormContext } from "./FormContext";
 
 type FormProps = Omit<ComponentProps<"form">, "action"> & {
   action: (initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
+  messages?: Partial<Record<string, string>>,
 };
 
 const Form = ({
   action,
+  messages = {},
   className,
   children,
 }: FormProps) => {
@@ -37,12 +39,12 @@ const Form = ({
 
   return (
     <BaseForm action={formAction} className={className} errors={state}>
-      {Object.entries(globalErrors).map(([key, value]) => (
-        <div key={key} className="bg-red-500/50">
-          {value}
+      {Object.entries(globalErrors).map(([errorKey, error]) => (
+        <div key={errorKey} className="bg-red-500/50">
+          {messages[error] || error}
         </div>
       ))}
-      <FormContext value={{ getError, registerField, unregisterField }}>
+      <FormContext value={{ getError, errorMessages: messages, registerField, unregisterField }}>
         {children}
       </FormContext>
     </BaseForm>

@@ -9,6 +9,7 @@ type BaseFormFieldProps = {
   schema: ZodType,
   name: string,
   label?: string,
+  messages?: Partial<Record<string, string>>,
   renderInput: (props: ReturnType<typeof getFieldConstraints>) => ReactNode,
   renderLabel?: ComponentProps<typeof Field.Label>["render"],
   renderErrors?: ComponentProps<typeof Field.Error>["render"],
@@ -19,6 +20,7 @@ const BaseFormField = ({
   schema,
   name,
   label,
+  messages,
   renderInput,
   renderLabel,
   renderErrors,
@@ -36,7 +38,7 @@ const BaseFormField = ({
         {typeof message === "string" ? message : message(getErrorMessagePayload(schema, stateName as keyof ValidityState))}
       </Field.Error>
     ))}
-    <ServerSideError name={name} render={renderErrors} />
+    <ServerSideError name={name} messages={messages} render={renderErrors} />
   </FieldRoot>
 );
 

@@ -5,18 +5,21 @@ import { FormContext } from "./FormContext";
 
 type ServerSideErrorProps = {
   name: string,
+  messages?: Partial<Record<string, string>>,
   render?: ComponentProps<typeof Field.Error>["render"],
 };
 
 const ServerSideError = ({
   name,
+  messages: fieldMessages = {},
   render,
 }: ServerSideErrorProps) => {
-  const { getError } = use(FormContext);
+  const { getError, errorMessages: formMessages } = use(FormContext);
   const error = getError(name);
+  if (!error) return null;
   return (
-    <Field.Error match={error !== null} render={render}>
-      {error}
+    <Field.Error match render={render}>
+      {fieldMessages[error] || formMessages[error] || error}
     </Field.Error>
   );
 };
