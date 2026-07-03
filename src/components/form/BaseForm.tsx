@@ -1,22 +1,22 @@
 "use client";
-import { Form as BaseForm } from "@base-ui/react/form";
+import { Form } from "@base-ui/react/form";
 import { type ComponentProps, useActionState, useRef } from "react";
 import JustDiv from "../elements/JustDiv";
 import { FormContext } from "./FormContext";
 
-type FormProps = Omit<ComponentProps<"form">, "action"> & {
+type BaseFormProps = Omit<ComponentProps<"form">, "action"> & {
   action: (initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
   messages?: Partial<Record<string, string>>,
   renderMessages?: ComponentProps<typeof JustDiv>["render"],
 };
 
-const Form = ({
+const BaseForm = ({
   action,
   messages: messageTranslations = {},
   renderMessages,
   className,
   children,
-}: FormProps) => {
+}: BaseFormProps) => {
   const [state, formAction, _loading] = useActionState(action, {});
   const fieldsRef = useRef<Set<string>>(new Set());
 
@@ -46,7 +46,7 @@ const Form = ({
   });
 
   return (
-    <BaseForm action={formAction} className={className} errors={fieldMessages}>
+    <Form action={formAction} className={className} errors={fieldMessages}>
       {Object.entries(formMessages).map(([messageKey, message]) => (
         <JustDiv
           key={messageKey}
@@ -59,8 +59,8 @@ const Form = ({
       <FormContext value={{ getFieldMessage, messageTranslations, registerField, unregisterField }}>
         {children}
       </FormContext>
-    </BaseForm>
+    </Form>
   );
 };
 
-export default Form;
+export default BaseForm;
