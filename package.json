@@ -53,6 +53,10 @@
       "types": "./dist/components/table/index.d.ts",
       "import": "./dist/components/table/index.js"
     },
+    "./page": {
+      "types": "./dist/components/page/index.d.ts",
+      "import": "./dist/components/page/index.js"
+    },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
       "import": "./dist/utils/index.js"
