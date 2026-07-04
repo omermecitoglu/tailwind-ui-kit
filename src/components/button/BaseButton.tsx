@@ -1,14 +1,12 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type ComponentProps, type ReactNode } from "react";
+import { type ComponentProps } from "react";
 import { cn } from "../../utils/cn";
 import PulseButton from "./PulseButton";
-import type { Button } from "@base-ui/react/button";
 
-type BaseButtonProps = ComponentProps<typeof Button> & {
+type BaseButtonProps = ComponentProps<typeof PulseButton> & {
   size?: "lg" | "md" | "sm" | "xs",
   pending?: boolean,
-  children: ReactNode,
 };
 
 const BaseButton = ({
@@ -21,6 +19,7 @@ const BaseButton = ({
   ...otherProps
 }: BaseButtonProps) => (
   <PulseButton
+    {...otherProps}
     className={cn({
       // Size
       "h-12 px-5 text-base leading-7 gap-3": size === "lg",
@@ -47,7 +46,6 @@ const BaseButton = ({
     ], className)}
     disabled={disabled}
     focusableWhenDisabled={pending || focusableWhenDisabled}
-    {...otherProps}
   >
     {pending && (
       <FontAwesomeIcon icon={faSpinner} size="lg" className="fa-spin-pulse" />
