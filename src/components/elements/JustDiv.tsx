@@ -2,12 +2,12 @@ import { useRender } from "@base-ui/react/use-render";
 
 const JustDiv = ({
   render,
-  ...otherProps
+  ...props
 }: useRender.ComponentProps<"div">) => {
   return useRender({
     defaultTagName: "div",
     render,
-    props: otherProps,
+    props,
   });
 };
 
