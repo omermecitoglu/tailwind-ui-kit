@@ -8,8 +8,14 @@ export function useRipples() {
   const handleClick = (e: React.MouseEvent<Element>) => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
-    const x = e.clientX - rect.left - (size / 2);
-    const y = e.clientY - rect.top - (size / 2);
+
+    // Keyboard-triggered clicks (space/enter) don't have real pointer coords.
+    const hasValidPointer =
+      typeof e.clientX === "number" &&
+      typeof e.clientY === "number" &&
+      (e.clientX !== 0 || e.clientY !== 0);
+    const x = hasValidPointer ? e.clientX - rect.left - (size / 2) : (rect.width / 2) - (size / 2);
+    const y = hasValidPointer ? e.clientY - rect.top - (size / 2) : (rect.height / 2) - (size / 2);
 
     const newRipple = { x, y, size, id: Date.now() };
     setRipples(prev => [...prev, newRipple]);
