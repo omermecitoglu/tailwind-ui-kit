@@ -33,7 +33,7 @@ const BaseFormField = ({
         {label}
       </Field.Label>
     )}
-    <JustInput render={control} {...getFieldConstraints(schema)} />
+    <JustInput name={name} render={control} {...getFieldConstraints(schema)} />
     {Object.entries(clientSideErrors).map(([stateName, message]) => (
       <Field.Error key={stateName} match={stateName as keyof ValidityState} render={renderErrors}>
         {typeof message === "string" ? message : message(getErrorMessagePayload(schema, stateName as keyof ValidityState))}
