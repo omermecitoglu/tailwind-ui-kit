@@ -16,7 +16,7 @@ function isDirty(el: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement)
 
 export function getDirtyFormData(form: HTMLFormElement): FormData {
   const dirty = new FormData();
-  for (const e of form.elements) {
+  for (const e of Array.from(form.elements)) {
     if (e instanceof HTMLInputElement || e instanceof HTMLTextAreaElement || e instanceof HTMLSelectElement) {
       if (!e.name) continue;
 
