@@ -9,9 +9,12 @@ function isDirty(el: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement)
       .join(",");
   }
   if (el.type === "checkbox" || el.type === "radio") {
-    return (el as HTMLInputElement).checked !== (el as HTMLInputElement).defaultChecked;
+    const baseline = el.dataset.defaultChecked !== undefined
+      ? el.dataset.defaultChecked === "true"
+      : (el as HTMLInputElement).defaultChecked;
+    return (el as HTMLInputElement).checked !== baseline;
   }
-  return el.value !== el.defaultValue;
+  return el.value !== (el.dataset.defaultValue ?? el.defaultValue);
 }
 
 export function getDirtyFormData(form: HTMLFormElement): FormData {
