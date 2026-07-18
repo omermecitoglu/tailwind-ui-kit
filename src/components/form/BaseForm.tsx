@@ -1,6 +1,7 @@
 "use client";
 import { Form } from "@base-ui/react/form";
 import { type ComponentProps, useActionState, useRef } from "react";
+import { getDirtyFormData } from "../../utils/dirty-form";
 import JustDiv from "../elements/JustDiv";
 import { FormContext } from "./FormContext";
 
@@ -8,17 +9,20 @@ type BaseFormProps = Omit<ComponentProps<"form">, "action"> & {
   action: (initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
   messages?: Partial<Record<string, string>>,
   renderMessages?: ComponentProps<typeof JustDiv>["render"],
+  onlyDirty?: boolean,
 };
 
 const BaseForm = ({
   action,
   messages: messageTranslations = {},
   renderMessages,
+  onlyDirty = false,
   className,
   children,
 }: BaseFormProps) => {
   const [state, formAction, _loading] = useActionState(action, {});
   const fieldsRef = useRef<Set<string>>(new Set());
+  const formRef = useRef<HTMLFormElement>(null);
 
   const getFieldMessage = (fieldName: string) => {
     if (fieldName in state) {
@@ -45,8 +49,15 @@ const BaseForm = ({
     fieldMessages: {} as Record<string, string>,
   });
 
+  const alteredAction = async (fd: FormData) => {
+    if (!onlyDirty) return formAction(fd);
+    const form = formRef.current;
+    if (!form) return formAction(fd);
+    return formAction(getDirtyFormData(form));
+  };
+
   return (
-    <Form action={formAction} className={className} errors={fieldMessages}>
+    <Form ref={formRef} action={alteredAction} className={className} errors={fieldMessages}>
       {Object.entries(formMessages).map(([messageKey, message]) => (
         <JustDiv
           key={messageKey}
