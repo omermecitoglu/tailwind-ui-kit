@@ -1,28 +1,34 @@
 "use client";
 import { Form } from "@base-ui/react/form";
-import { type ComponentProps, useActionState, useRef } from "react";
+import { type ComponentProps, useActionState, useEffect, useRef } from "react";
 import { getDirtyFormData } from "../../utils/dirty-form";
 import JustDiv from "../elements/JustDiv";
 import { FormContext } from "./FormContext";
 
 type BaseFormProps = Omit<ComponentProps<"form">, "action"> & {
   action: (initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
+  onlyDirty?: boolean,
   messages?: Partial<Record<string, string>>,
   renderMessages?: ComponentProps<typeof JustDiv>["render"],
-  onlyDirty?: boolean,
+  onStateChange?: (state: Record<string, string>) => void,
 };
 
 const BaseForm = ({
   action,
+  onlyDirty = false,
   messages: messageTranslations = {},
   renderMessages,
-  onlyDirty = false,
+  onStateChange,
   className,
   children,
 }: BaseFormProps) => {
   const [state, formAction, _loading] = useActionState(action, {});
   const fieldsRef = useRef<Set<string>>(new Set());
   const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    onStateChange?.(state);
+  }, [state]);
 
   const getFieldMessage = (fieldName: string) => {
     if (fieldName in state) {
