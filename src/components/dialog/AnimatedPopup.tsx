@@ -2,7 +2,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { cn } from "../../utils/cn";
 
-const AnimatedPopup = ({ render, ...otherProps }: useRender.ComponentProps<"div">) => useRender({
+const AnimatedPopup = ({ render, className, ...otherProps }: useRender.ComponentProps<"div">) => useRender({
   defaultTagName: "div",
   render,
   props: mergeProps<"div">({
@@ -26,6 +26,7 @@ const AnimatedPopup = ({ render, ...otherProps }: useRender.ComponentProps<"div"
       "data-[nested-dialog-open]:after:bg-black/5",
       "data-[starting-style]:scale-90",
       "data-[starting-style]:opacity-0",
+      className,
     ),
   }, otherProps),
 });

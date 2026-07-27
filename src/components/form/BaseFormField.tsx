@@ -1,5 +1,6 @@
 import { Field } from "@base-ui/react/field";
 import { getErrorMessagePayload, getFieldConstraints } from "@omer-x/zod-to-form-constraints";
+import { cn } from "../../utils/cn";
 import JustInput from "../elements/JustInput";
 import FieldRoot from "./FieldRoot";
 import ServerSideError from "./ServerSideError";
@@ -15,6 +16,7 @@ type BaseFormFieldProps = {
   renderLabel?: ComponentProps<typeof Field.Label>["render"],
   renderErrors?: ComponentProps<typeof Field.Error>["render"],
   clientSideErrors?: Partial<Record<keyof ValidityState, string | ((payload: string | number | null) => string)>>,
+  className?: string,
 };
 
 const BaseFormField = ({
@@ -26,8 +28,9 @@ const BaseFormField = ({
   renderLabel,
   renderErrors,
   clientSideErrors = {},
+  className,
 }: BaseFormFieldProps) => (
-  <FieldRoot name={name} className="flex w-full flex-col items-start gap-1">
+  <FieldRoot name={name} className={cn("flex w-full flex-col items-start gap-1", className)}>
     {typeof label !== "undefined" && (
       <Field.Label render={renderLabel}>
         {label}
