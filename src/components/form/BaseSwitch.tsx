@@ -1,6 +1,6 @@
 import { Switch } from "@base-ui/react/switch";
-import { cn } from "@omer-x/tailwind-ui-kit/utils";
 import { type ComponentProps, type ReactNode } from "react";
+import { cn } from "../../utils/cn";
 
 type BaseSwitchProps = ComponentProps<typeof Switch.Root> & {
   label: ReactNode,
