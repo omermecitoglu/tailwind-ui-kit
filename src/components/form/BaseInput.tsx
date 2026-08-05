@@ -1,8 +1,8 @@
-import { Input } from "@base-ui/react/input";
 import { type ComponentProps } from "react";
 import { cn } from "../../utils/cn";
+import JustInput from "../elements/JustInput";
 
-type BaseInputProps = Omit<ComponentProps<typeof Input>, "size"> & {
+type BaseInputProps = Omit<ComponentProps<typeof JustInput>, "size"> & {
   size?: "lg" | "md" | "sm" | "xs",
 };
 
@@ -11,7 +11,8 @@ const BaseInput = ({
   className,
   ...otherProps
 }: BaseInputProps) => (
-  <Input
+  <JustInput
+    {...otherProps}
     className={cn({
       // Size
       "h-12 px-5 text-base": size === "lg",
@@ -26,7 +27,6 @@ const BaseInput = ({
       "outline-transparent",
       "transition-colors",
     ], className)}
-    {...otherProps}
   />
 );
 

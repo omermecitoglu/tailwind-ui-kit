@@ -7,6 +7,7 @@ import { FormContext } from "./FormContext";
 
 type BaseFormProps = Omit<ComponentProps<"form">, "action"> & {
   action: (initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
+  defaultValues?: Record<string, unknown>,
   onlyDirty?: boolean,
   messages?: Partial<Record<string, string>>,
   renderMessages?: ComponentProps<typeof JustDiv>["render"],
@@ -15,6 +16,7 @@ type BaseFormProps = Omit<ComponentProps<"form">, "action"> & {
 
 const BaseForm = ({
   action,
+  defaultValues = {},
   onlyDirty = false,
   messages: messageTranslations = {},
   renderMessages,
@@ -59,7 +61,7 @@ const BaseForm = ({
     if (!onlyDirty) return formAction(fd);
     const form = formRef.current;
     if (!form) return formAction(fd);
-    return formAction(getDirtyFormData(form));
+    return formAction(getDirtyFormData(form, defaultValues));
   };
 
   return (
