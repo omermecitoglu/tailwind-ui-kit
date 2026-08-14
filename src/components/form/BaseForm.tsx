@@ -1,11 +1,11 @@
 "use client";
 import { Form } from "@base-ui/react/form";
-import { type ComponentProps, useActionState, useEffect, useRef } from "react";
+import { type ComponentProps, type ComponentPropsWithoutRef, useActionState, useEffect, useRef } from "react";
 import { getDirtyFormData } from "../../utils/dirty-form";
 import JustDiv from "../elements/JustDiv";
 import { FormContext } from "./FormContext";
 
-type BaseFormProps = Omit<ComponentProps<"form">, "action"> & {
+type BaseFormProps = Omit<ComponentPropsWithoutRef<"form">, "action"> & {
   action: (initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
   defaultValues?: Record<string, unknown>,
   onlyDirty?: boolean,
@@ -21,8 +21,8 @@ const BaseForm = ({
   messages: messageTranslations = {},
   renderMessages,
   onStateChange,
-  className,
   children,
+  ...otherProps
 }: BaseFormProps) => {
   const [state, formAction, _loading] = useActionState(action, {});
   const fieldsRef = useRef<Set<string>>(new Set());
@@ -65,7 +65,12 @@ const BaseForm = ({
   };
 
   return (
-    <Form ref={formRef} action={alteredAction} className={className} errors={fieldMessages}>
+    <Form
+      {...otherProps}
+      ref={formRef}
+      action={alteredAction}
+      errors={fieldMessages}
+    >
       {Object.entries(formMessages).map(([messageKey, message]) => (
         <JustDiv
           key={messageKey}
