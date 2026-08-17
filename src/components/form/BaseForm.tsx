@@ -21,6 +21,7 @@ const BaseForm = ({
   messages: messageTranslations = {},
   renderMessages,
   onStateChange,
+  onSubmit,
   children,
   ...otherProps
 }: BaseFormProps) => {
@@ -70,6 +71,10 @@ const BaseForm = ({
       ref={formRef}
       action={alteredAction}
       errors={fieldMessages}
+      onSubmit={e => {
+        e.stopPropagation(); // fixes nested forms
+        onSubmit?.(e);
+      }}
     >
       {Object.entries(formMessages).map(([messageKey, message]) => (
         <JustDiv
